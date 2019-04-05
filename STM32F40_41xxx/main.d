@@ -35,3 +35,5 @@ stm32f40_41xxx\main.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dac.h
 stm32f40_41xxx\main.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dcmi.h
 stm32f40_41xxx\main.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fsmc.h
 stm32f40_41xxx\main.o: hal.h
+stm32f40_41xxx\main.o: adf435x.h
+stm32f40_41xxx\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

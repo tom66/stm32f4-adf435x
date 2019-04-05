@@ -23,11 +23,16 @@
 
 #include "hal.h"
 
+#include <stdio.h>
+#include <stdarg.h>
+
 /*
  * Layer to interface with STM32F4 processor.  This layer is likely to be replaced 
  * when we move to the STM32F0/F1 processor for the final design.
  */
 
+char vsnprint_buffer[1024];
+    
 /*
  * hal_init:  Initialise key hardware resources
  */
@@ -88,8 +93,9 @@ void hal_init()
     USART_Init(UART_DEBUG_PERIPH, &UART_InitStructure);
     USART_Cmd(UART_DEBUG_PERIPH, ENABLE);
     
+    uart_putsraw("\r\n\r\n");
     uart_putsraw("STM32-ADF435x Test Application\r\n");
-    uart_putsraw("usart: ready\r\n");
+    uart_putsraw("hal: ready\r\n");
 }
 
 /*
@@ -99,10 +105,29 @@ void hal_init()
  */
 void uart_putsraw(char *str)
 {
-    while(*str) {
+    do {
+        while(USART_GetFlagStatus(UART_DEBUG_PERIPH, USART_FLAG_TXE) == RESET);
         USART_SendData(UART_DEBUG_PERIPH, *str);
-        str++;
-    }
+    } while(*str++) ;
+}
+
+/*
+ * uart_printf:  Put debug string with printf formatting.
+ *
+ * @note    buffer size limit enforced by vsnprintf
+ *
+ * @param   fmt         Format string
+ * @param   ...         Zero or more arguments for format string
+ */
+void uart_printf(char *fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+    
+    vsnprintf(vsnprint_buffer, sizeof(vsnprint_buffer), fmt, args);
+    uart_putsraw(vsnprint_buffer);
+    
+    va_end(args);
 }
 
 /*

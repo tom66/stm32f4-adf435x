@@ -35,3 +35,5 @@ stm32f40_41xxx\hal.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_can.h
 stm32f40_41xxx\hal.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dac.h
 stm32f40_41xxx\hal.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_dcmi.h
 stm32f40_41xxx\hal.o: ./STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_fsmc.h
+stm32f40_41xxx\hal.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f40_41xxx\hal.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
